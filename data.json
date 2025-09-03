@@ -1,0 +1,14 @@
+[
+    {
+        "king":"Arthur",
+        "picture_url":"https://en.wikipedia.org/wiki/King_Arthur"
+    },
+    {
+        "king":"Henry VIII",
+        "picture_url":"https://en.wikipedia.org/wiki/Henry_VIII"
+    },
+    {
+        "king":"Louis XVI",
+        "picture_url":"https://en.wikipedia.org/wiki/Louis_XVI"
+    }
+]
