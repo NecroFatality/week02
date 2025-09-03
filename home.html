@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <title>Document</title>
+    <title>Week 02 Node.js + React Basics</title>
 </head>
 <body>
    <div id="home"></div>
@@ -21,16 +21,14 @@
     import { createRoot } from 'https://cdn.jsdelivr.net/npm/react-dom@19.1.1/client/+esm';
 
     
-    function testList(items) {
+    function TestList(items) {
         return   <div>
                     <ol>
                     {
                         items.list.map(
                             (item,index) => (
                                 <li key={index}>
-                                    <a href={item.link}>
-                                    {item.kings}
-                                    </a>
+                                    <a href={item.picture_url}>{item.king}</a>
                                 </li>
                             
                             )
@@ -42,19 +40,16 @@
     }
   
     $.getJSON(
-        "whatever",
+        "/data.json",
     function(jfj) {
-
-        console.log(jfj)
+     console.log(jfj)
 
         const  myApplication = document.getElementById('home');
         const root = createRoot(myApplication);
         root.render(
-            <testList list={jfj} />
-
-        );
+            <TestList list={jfj} />);
     }
-    )
+    );
    </script>
 </body>
 </html>
