@@ -10,8 +10,8 @@ const filesys = require("fs").promises;
 const listens = function( Requests, Responses) {
     console.log( Requests.url );
 
-    let returns = function(data){
-        Responses.writeHead(200);
+    let returns = function(data, type = "text/plain"){
+        Responses.writeHead(200, {"Content-Type": type + "; charset=UTF-8" });
         Responses.end(data);
     };
 
@@ -19,17 +19,14 @@ const listens = function( Requests, Responses) {
         case Requests.url === "/":  
       //return html file
         filesys.readFile(__dirname + "/home.html")
-        .then(data => {  // same as function(data) {...} V
-    
-                    Responses.setHeader("Content-Type", "text/html; charset=UTF-8");
-                    returns(data, "text/html");
+            .then(data => {  // same as function(data) {...} V
+                returns(data, "text/html");
             })
                     break;
 
         case Requests.url.startsWith("/") && Requests.url !== "/": 
                     filesys.readFile(__dirname + "/data.json")
-                    Responses.setHeader("Content-Type", "application/json; charset=UTF-8");
-                    returns(data,"application/json");
+                    .then(data => returns(data, "application/json"))
                     break;
                 }
             };
@@ -37,4 +34,4 @@ const listens = function( Requests, Responses) {
 
 let myserver = myhttp.createServer(listens);
 
-myserver.listen( 8080, "127.0.0.1" );
+myserver.listen(8080, "127.0.0.1" );
