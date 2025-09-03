@@ -3,9 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <title>Document</title>
 </head>
 <body>
-    <h1>hi there</h1>
+   <div id="home"></div>
+
+
+   <script data-type="module" data-presets="react" type="text/babel">
+    "use strict";
+
+
+    //load react as module
+    import React from 'https://cdn.jsdelivr.net/npm/react@19.1.1/+esm';
+
+    import { createRoot } from 'https://cdn.jsdelivr.net/npm/react-dom@19.1.1/client/+esm';
+
+    
+    function testList(items) {
+        return   <div>
+                    <ol>
+                    {
+                        items.list.map(
+                            (item,index) => (
+                                <li key={index}>
+                                    <a href={item.link}>
+                                    {item.kings}
+                                    </a>
+                                </li>
+                            
+                            )
+                            
+                        )
+                    }
+                    </ol>
+                    </div>
+    }
+  
+    $.getJSON(
+        "whatever",
+    function(jfj) {
+
+        console.log(jfj)
+
+        const  myApplication = document.getElementById('home');
+        const root = createRoot(myApplication);
+        root.render(
+            <testList list={jfj} />
+
+        );
+    }
+    )
+   </script>
 </body>
 </html>
