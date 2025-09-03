@@ -25,7 +25,7 @@ const listens = function( Requests, Responses) {
                     break;
 
         case Requests.url.startsWith("/") && Requests.url !== "/": 
-                    filesys.readFile(__dirname + "/data.json")
+                    filesys.readFile(__dirname + "/info.json")
                     .then(data => returns(data, "application/json"))
                     break;
                 }
