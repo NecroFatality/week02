@@ -14,28 +14,28 @@ const listens = function( Requests, Responses) {
     };
 
 
-    if ( Requests.url === '/'){
+    switch (Requests.url){
+        case "/":  
         //check request url, if root, return html file
-        filesys.readFile(__dirname + "/home.html")
-        .then(
-            // same as function(data) {...} V
-            data => {
-                switch (Requests.url){
-                    case "/":  
+        filesys.readFile(__dirname + "/home.html").then(
+            data => {  // same as function(data) {...} V
+    
                     Responses.setHeader("Content-Type", "text/html; charset=UTF-8");
-                    returns();
+                    returns(data);
+            })
                     break;
 
-                    case "json": 
+        case "/json": 
                     Responses.setHeader("Content-Type", "application/json; charset=UTF-8");
-                    returns();
+                    returns(data);
                     break;
-             
+
+                    default:
+                        Responses.writeHead(404, { "Content-Type": "text/plain; charset=UTF-8" });
+                        Responses.end("404 Not Found");
                 }
-            }   
-        );
-      } 
-};
+            };
+    
 
 let myserver = myhttp.createServer(listens);
 
